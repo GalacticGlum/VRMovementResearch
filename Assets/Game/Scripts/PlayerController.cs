@@ -57,7 +57,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float pickupMovementSmoothening = 4;
     [SerializeField]
-    private float pickupRotationSpeed = 30; 
+    private float pickupRotationSpeed = 30;
+    [SerializeField]
+    private float objectDropThrowVelocity = 5;
 
     private GameObject objectBeingCarried;
     private bool isCarryingObject;
@@ -84,6 +86,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        // If our settings have changed, let's update our player data.
+        if (GameSettings.PlayerMovementType != movementType)
+        {
+            movementType = GameSettings.PlayerMovementType;
+        }
+
         DPad.Update();
 
         if (isCarryingObject && objectBeingCarried != null)
@@ -99,7 +107,10 @@ public class PlayerController : MonoBehaviour
             if (!DPad.Down) return;
 
             isCarryingObject = false;
-            objectBeingCarried.GetComponent<Rigidbody>().isKinematic = false;
+
+            Rigidbody objectBeingCarriedRigidbody = objectBeingCarried.GetComponent<Rigidbody>();
+            objectBeingCarriedRigidbody.isKinematic = false;
+            objectBeingCarriedRigidbody.velocity = vrCamera.transform.forward * objectDropThrowVelocity;
 
             // Reset the colour of the material just in case it was changed anywhere else.
             objectBeingCarried.GetComponent<MeshRenderer>().material.color = Color.white;

@@ -38,10 +38,10 @@ public class MenuController : MonoBehaviour
     }
 
     /// <summary>
-    /// Loads the game scene.
+    /// Loads a scene by index.
     /// </summary>
-    public void StartGame()
+    public void LoadScene(int index)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(index);
     }
 }

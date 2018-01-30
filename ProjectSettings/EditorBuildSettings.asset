@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/CubeBucketMinigame.unity
     guid: 1b15b1004fb246d4cbc1f331e092f97c
+  - enabled: 1
+    path: Assets/Game/Scenes/SandboxLevel.unity
+    guid: 5a0b131db91ab414c9abf0a02b9e9499
