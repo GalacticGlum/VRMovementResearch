@@ -147,7 +147,6 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerMovementType.Teleport:
                 HandleTeleport();
-
                 break;
         }
     }
@@ -170,6 +169,7 @@ public class PlayerController : MonoBehaviour
 
             if (isCarryingObject)
             {
+                // We make our carried object translucent so we can see where we want to teleport (beyond the carried object).
                 objectBeingCarried.GetComponent<MeshRenderer>().material.color = new Color(1, 1, 1, 0.2f);
             }
 
@@ -236,10 +236,14 @@ public class PlayerController : MonoBehaviour
 
         if (isCarryingObject)
         {
+            // Reset our carried object color back to white (full alpha).
             objectBeingCarried.GetComponent<MeshRenderer>().material.color = Color.white;
         }
     }
-
+    
+    /// <summary>
+    /// Gets the destination position of the carry object with the offset applied.
+    /// </summary>
     private Vector3 GetCarryObjectDestination()
     {
         return vrCamera.transform.position + vrCamera.transform.forward * pickupObjectOffset;
