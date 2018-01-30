@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
+        movementType = GameSettings.PlayerMovementType;
+
         Instance = this;
     }
 

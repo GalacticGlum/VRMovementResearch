@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Game/Scenes/MainMenu.unity
+    guid: d212ba5812a50c842ab7962feb6c1217
+  - enabled: 1
+    path: Assets/Game/Scenes/CubeBucketMinigame.unity
+    guid: 1b15b1004fb246d4cbc1f331e092f97c

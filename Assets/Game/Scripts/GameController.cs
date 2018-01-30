@@ -8,6 +8,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Controls the state of the game.
@@ -52,7 +53,12 @@ public class GameController : MonoBehaviour
 
         Time.timeScale = 0;
 
+        // There is no actual gameover screen, rather we just output the results to the console as this is
+        // a demo for research purposes.
         Debug.Log("Gameover");
         Debug.Log(Score + " points.");
+
+        // Go back to the main menu scene.
+        SceneManager.LoadScene(0);
     }
 }
