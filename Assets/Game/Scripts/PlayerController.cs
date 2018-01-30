@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
     private Camera fadeCamera;
     [SerializeField]
     private float teleportFadeDuration = 0.5f;
+    [SerializeField]
+    private float teleportRange = 6;
 
     [Header("Object Pickup")]
     [SerializeField]
@@ -96,6 +98,9 @@ public class PlayerController : MonoBehaviour
 
             isCarryingObject = false;
             objectBeingCarried.GetComponent<Rigidbody>().isKinematic = false;
+
+            // Reset the colour of the material just in case it was changed anywhere else.
+            objectBeingCarried.GetComponent<MeshRenderer>().material.color = Color.white;
 
             objectBeingCarried = null;
         }
@@ -187,6 +192,11 @@ public class PlayerController : MonoBehaviour
                 teleportSelectionGameObject.transform.rotation = Quaternion.identity;
             }
 
+            float distanceFromHit = Vector3.Distance(hit.point, transform.position);
+
+            Color teleportSelectionColour = distanceFromHit > teleportRange ? new Color(1, 0, 0, 0.4f) : new Color(0, 1, 0, 0.4f);
+            teleportSelectionGameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = teleportSelectionColour;
+
             isInTeleportMode = true;
         }
         else
@@ -195,16 +205,22 @@ public class PlayerController : MonoBehaviour
             // it means that we need to apply the teleport.
             if (isInTeleportMode)
             {
-                StartCoroutine("ExecuteTeleportFade");
-
                 // We only care about the x and z components of the teleport position.
                 // We need the y to stay the same so that the camera doesn't clip into the floor.
                 Vector3 newPosition = new Vector3(teleportSelectionGameObject.transform.position.x, transform.position.y, teleportSelectionGameObject.transform.position.z);
-                transform.position = newPosition;
 
-                if (isCarryingObject)
+                float distanceFromNewPosition = Vector3.Distance(newPosition, transform.position);
+
+                // Only execute the teleport if it is within range
+                if (distanceFromNewPosition <= teleportRange)
                 {
-                    objectBeingCarried.transform.position = GetCarryObjectDestination();
+                    StartCoroutine("ExecuteTeleportFade");
+                    transform.position = newPosition;
+
+                    if (isCarryingObject)
+                    {
+                        objectBeingCarried.transform.position = GetCarryObjectDestination();
+                    }
                 }
             }
 
