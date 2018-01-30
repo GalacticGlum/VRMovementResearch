@@ -2,7 +2,7 @@
  * Author: Shon Verch
  * File Name: PlayerMovementType.cs
  * Project Name: VRMovementResearch
- * Creation Date: 12/20/2017
+ * Creation Date: 12/24/2017
  * Modified Date: 12/24/2017
  * Description: The type of movement that the player uses.
  */
@@ -13,6 +13,6 @@
 public enum PlayerMovementType
 {
     FreeWalk,
-    LookWalk,
     Teleport,
+    LookWalk,
 }
