@@ -3,7 +3,7 @@
  * File Name: PlayerController.cs
  * Project Name: VRMovementResearch
  * Creation Date: 12/20/2017
- * Modified Date: 12/26/2017
+ * Modified Date: 12/27/2017
  * Description: The movement controller for the player.
  */
 
@@ -20,11 +20,6 @@ public class PlayerController : MonoBehaviour
     /// The active <see cref="PlayerController"/> in the scene.
     /// </summary>
     public static PlayerController Instance { get; private set; }
-
-    /// <summary>
-    /// The minimum distance that the player must be from a pickupable object to pick it up.
-    /// </summary>
-    public float PickupRadius { get { return pickupRadius; } }
 
     [Header("General")]
     [SerializeField]
@@ -92,7 +87,7 @@ public class PlayerController : MonoBehaviour
             movementType = GameSettings.PlayerMovementType;
         }
 
-        DPad.Update();
+        DPadInput.Update();
 
         if (isCarryingObject && objectBeingCarried != null)
         {
@@ -104,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
             // If we aren't pressing the pickup key, let's bail!
             // If we are pressing it at this point, we want to drop the item that we are holding.
-            if (!DPad.Down) return;
+            if (!DPadInput.Down) return;
 
             isCarryingObject = false;
 
@@ -121,7 +116,7 @@ public class PlayerController : MonoBehaviour
         {
             // We only want to pickup an item when we press up on the Dpad. When it is NOT down,
             // let's bail out of this method.
-            if (!DPad.Up) return;
+            if (!DPadInput.Up) return;
 
             RaycastHit hit;
             if (!Physics.Raycast(vrCamera.transform.position, vrCamera.transform.forward, out hit)) return;

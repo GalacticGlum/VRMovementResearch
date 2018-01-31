@@ -12,5 +12,8 @@
 /// </summary>
 public static class GameSettings
 {
+    /// <summary>
+    /// The movement type of the player.
+    /// </summary>
     public static PlayerMovementType PlayerMovementType { get; set; }
 }

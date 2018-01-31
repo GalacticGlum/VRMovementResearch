@@ -35,8 +35,6 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         Invoke("EndGame", gameLengthInSeconds);
-        Time.timeScale = 1;
-
         Instance = this;
     }
 
@@ -45,8 +43,6 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void EndGame()
     {
-        Time.timeScale = 0;
-
         // There is no actual gameover screen, rather we just output the results to the console as this is
         // a demo for research purposes.
         Debug.Log("Gameover");

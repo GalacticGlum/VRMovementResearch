@@ -12,17 +12,35 @@ using UnityEngine;
 /// <summary>
 /// Manages the states of the DPad buttons.
 /// </summary>
-public static class DPad
+public static class DPadInput
 {
+    /// <summary>
+    /// Indicates whether the up key on the D-Pad is pressed (true for pressed; false for not).
+    /// </summary>
     public static bool Up { get; private set; }
+
+    /// <summary>
+    /// Indicates whether the down key on the D-Pad is pressed (true for pressed; false for not).
+    /// </summary>
     public static bool Down { get; private set; }
+
+    /// <summary>
+    /// Indicates whether the left key on the D-Pad is pressed (true for pressed; false for not).
+    /// </summary>
     public static bool Left { get; private set; }
+
+    /// <summary>
+    /// Indicates whether the right key on the D-Pad is pressed (true for pressed; false for not).
+    /// </summary>
     public static bool Right { get; private set; }
 
     private static readonly float lastX;
     private static readonly float lastY;
 
-    static DPad()
+    /// <summary>
+    /// Initialize all static data.
+    /// </summary>
+    static DPadInput()
     {
         Up = Down = Left = Right = false;
         lastX = Input.GetAxis("DPadHorizontal");
