@@ -21,11 +21,6 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
 
     /// <summary>
-    /// The amount of seconds that are left in this game. 
-    /// </summary>
-    public float TimeLeft { get; private set; }
-
-    /// <summary>
     /// The score of the user.
     /// </summary>
     public int Score { get; set; }
@@ -39,18 +34,17 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        TimeLeft = gameLengthInSeconds;
+        Invoke("EndGame", gameLengthInSeconds);
+        Time.timeScale = 1;
+
         Instance = this;
     }
 
     /// <summary>
-    /// Called every frame.
+    /// Handle the end game logic.
     /// </summary>
-    private void Update()
+    private void EndGame()
     {
-        TimeLeft -= Time.deltaTime;
-        if (!(TimeLeft <= 0)) return;
-
         Time.timeScale = 0;
 
         // There is no actual gameover screen, rather we just output the results to the console as this is
