@@ -3,10 +3,11 @@
  * File Name: PlayerController.cs
  * Project Name: VRMovementResearch
  * Creation Date: 12/20/2017
- * Modified Date: 12/27/2017
+ * Modified Date: 12/28/2017
  * Description: The movement controller for the player.
  */
 
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -95,7 +96,7 @@ public class PlayerController : MonoBehaviour
             objectBeingCarried.transform.position = Vector3.Lerp(objectBeingCarried.transform.position, carryDestination, Time.deltaTime * pickupMovementSmoothening);
 
             float rightJoystickHorizontalAxis = Input.GetAxis("RightJoystickHorizontal");
-            objectBeingCarried.transform.Rotate(Vector3.up * pickupRotationSpeed * Time.deltaTime * -rightJoystickHorizontalAxis);
+            objectBeingCarried.transform.Rotate(Vector3.up * pickupRotationSpeed * Time.deltaTime * -rightJoystickHorizontalAxis, Space.World);
 
             // If we aren't pressing the pickup key, let's bail!
             // If we are pressing it at this point, we want to drop the item that we are holding.
